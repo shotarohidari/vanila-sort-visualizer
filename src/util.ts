@@ -9,3 +9,19 @@ export const shuffle = <T>(ary: T[]) => {
 	}
 	return newArray;
 };
+
+export function* resumableBubbleSort<T>(ary: T[]) {
+	const cloned = structuredClone(ary);
+	for (let i = ary.length - 1; 1 < i; i--) {
+		for (let j = 0; j < i; j++) {
+			const val1 = cloned[j];
+			const val2 = cloned[j + 1];
+			if (val1 > val2) {
+				cloned[j] = val2;
+				cloned[j + 1] = val1;
+				yield cloned;
+			}
+		}
+	}
+	return cloned;
+}
