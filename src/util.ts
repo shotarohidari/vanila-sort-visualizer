@@ -25,3 +25,22 @@ export function* resumableBubbleSort<T>(ary: T[]) {
 	}
 	return cloned;
 }
+
+export function* resumableSelectionSort(ary: number[]) {
+	const cloned = structuredClone(ary);
+
+	for (let i = 0; i < cloned.length - 1; i++) {
+		let minValIdx = i;
+		for (let j = i; j < cloned.length; j++) {
+			if (cloned[minValIdx] > cloned[j]) {
+				minValIdx = j;
+			}
+		}
+		const tmp = cloned[i];
+		const tmpIndex = minValIdx;
+		cloned[i] = cloned[minValIdx];
+		cloned[tmpIndex] = tmp;
+		yield cloned;
+	}
+	return cloned;
+}

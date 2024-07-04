@@ -1,4 +1,4 @@
-import { resumableBubbleSort, shuffle } from "./util";
+import { resumableSelectionSort, shuffle } from "./util";
 
 function run() {
 	const barWrapper = document.createElement("div");
@@ -10,7 +10,8 @@ function run() {
 	// シャッフル
 	const shuffledBars = shuffle(bars);
 	updateBars(shuffledBars);
-	const barGen = resumableBubbleSort(shuffledBars);
+	// const barGen = resumableBubbleSort(shuffledBars);
+	const barGen = resumableSelectionSort(shuffledBars);
 
 	const intervalId = window.setInterval(() => {
 		const { done, value } = barGen.next();
